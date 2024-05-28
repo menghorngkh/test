@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+    rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+     <!-- header css -->
+     <style>
+        .header {
+            max-width: 1280px;
+            margin: auto;
+            z-index: 40;
+        }
+        
+        .head-item{
+            padding: 10px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .open-icon, .close-icon {
+            display: none;
+        }
+
+        
+        .logo{
+            max-width: 200px;
+        }
+        
+
+        .nav-list {
+            position: relative;
+            display: flex;
+            gap: 20px;
+        }
+
+        .log-item button{
+            background-color: brown;
+            padding: .8rem 1rem ;
+            border-radius: .5rem;
+        }
+        
+        .wrap{
+            display: none;
+        }
+
+        .search {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        .searchTerm {
+            width: 100%;
+            border: .1rem solid #646464;
+            border-right: none;
+            padding: 10px;
+            height: 40px;
+            outline: none;
+            font-size: 17px;
+        }
+
+        .searchTerm:focus{
+            color: rgb(145, 145, 145);
+
+        }
+
+        .searchButton {
+            width: 50px;
+            height: 40px;
+            border: 1px solid #2c8eff;
+            background: #2c8eff;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.7rem;
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .wrap{
+                 display: block;
+                 width: 100%;
+                 position: absolute;
+                 top: 0;
+                 padding: 5rem;
+                 z-index: -1;
+                 margin-top: 3rem;
+            }
+            .logo{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .head-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .open-icon {
+                display: block;
+                position: absolute;
+                left: 0;
+            }
+            .open-icon i{
+                font-size: 2.5rem;
+                padding: 0 3rem;
+            }
+            .close-icon {
+                display: flex;
+                justify-content: end;
+                opacity: 80;
+            }
+            
+            .close-icon i{
+                color: black;
+                padding: 2rem 3rem;
+                font-size: 2.5rem;
+                z-index: 10;
+            }
+
+            .nav-list{
+                width: 100%;
+                position: absolute;
+                top: 0;
+                display: flex;
+                flex-direction: column;
+                padding: 5rem;
+                z-index: -1;
+                margin-top: 10rem;
+            }
+
+            .nav-list li,
+            .nav-list li i{
+                color: rgb(145, 145, 145);
+                font-size: 1.7rem;
+            }
+            
+            .nav-list li{
+                width: 100%;
+                border-bottom: .1rem solid #eee;
+                padding: 10px 0;
+                z-index: 50;
+            }
+
+            .btncenter button{
+                /* margin-top: 1rem; */
+                background-color: brown;
+                color: #fff;
+                padding: .8rem 1rem ;
+                border-radius: .5rem;
+                font-size: 1.2rem;
+                margin: 0 .5rem;
+            }
+
+            nav {
+                background-color: #fff;
+                position: fixed !important;
+                width: 0%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position: relative;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding: 0px !important;
+            }
+
+    }
+    </style>
+
+</head>
+<body>
+    <div class="container" >
+        <!-- header tailwins -->
+        <!-- <div class="header max-w-[1024px] m-auto tracking-wide p-3.5 z-40">
+            <div class="head-item bg-gray-900 flex justify-center md:justify-between items-center text-white font-semibold relative">
+                <div class="open-icon absolute left-0 md:hidden text-xl mt-1" onclick="OpenNav()">open</div>
+    
+                <div onclick="url()" class="logo max-w-[200px] cursor-pointer"><img src="./src/logo.png"></div>
+    
+                <nav id="Nav">
+                    <div class="close-icon md:hidden flex justify-end text-xl p-2 font-bold w-full h-full bg-gray-600 opacity-80" onclick="CloseNav()">close</div>
+    
+                    <ul class="nav-list h-full md:relative absolute top-0 z-50 flex flex-col gap-2 md:gap-5 md:flex-row md:p-5 text-md bg-gray-500 md:text-white md:bg-transparent *:py-4 *:md:py-0 *:md:border-none *:cursor-pointer">
+                        <li>TRANG CHỦ</a></li>
+                        <li>KHUYẾN MÃI</a></li>
+                        <li>ĐĂNG KÝ</a></li>
+                        <li>HƯỚNG DẪN</a></li>
+                        <li>LIÊN HỆ</a></li>
+                    </ul>
+                </nav>
+    
+                <div class="log-item text-white hidden md:block">
+                    <button class="">ĐĂNG KÝ</button>
+                    <button class="">ĐĂNG NHẬP</button>
+                </div>
+            </div>
+            <div class="text-gray-900 flex justify-center items-center bg-gray-500 md:hidden p-2">
+                <button class="">ĐĂNG KÝ</button>
+                <button class="">ĐĂNG NHẬP</button>
+            </div>
+        </div> -->
+        <!-- end of header -->
+    
+        <!-- header me-->
+        <!-- <div class="max-w-[1024px] m-auto bg-gray-900">
+            <div class=" flex justify-between text-md text-gray-800">
+    
+                <div onclick="openNav()" class="bar md:hidden"><i class="fa-solid fa-bars"></i></div>
+        
+                <div class="logo border">
+                    <img src="src/logo.png" alt="" class="w-3/12">
+                </div>
+        
+                <div class="">
+                    <ul class="lest flex">
+                        <li class="links">
+                            <a href="#">TRANG CHU</a>
+                        </li>
+                        <li class="links">
+                            <a href="#">HOUNG DAN <i class="fa-solid fa-angle-down"></i></a>
+                        </li>
+                        <li class="links">
+                            <a href="#">HOUNG DAN <i class="fa-solid fa-angle-down"></i></a>
+                        </li>
+                        <li class="links">
+                            <a href="#">BLOG</a>
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="icons">
+                    <a href="#">DANG KY</a>
+                    <a href="#">DANG NHAP</a>
+                </div>
+        
+            </div>
+        </div> -->
+        <!-- end of header -->
+    
+        <!-- header -->
+        <div class="header ">
+            <div class="head-item ">
+                <div class="open-icon " onclick="OpenNav()"><i class="fa-solid fa-bars"></i></div>
+    
+                <div onclick="url()" class="logo cursor-pointer"><img src="./src/logo.png"></div>
+    
+                <nav id="Nav">
+                    <div class="close-icon opacity-80">
+                        <i onclick="CloseNav()" class="fa-solid fa-xmark"></i>
+                    </div>
+    
+                    <div class="wrap">
+                        <div class="search">
+                           <input type="text" class="searchTerm" placeholder="Search...">
+                           <button type="submit" class="searchButton">
+                             <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                     </div>
+    
+                    <ul class="nav-list ">
+                        <li>TRANG CHỦ</li>
+                        <li>KHUYẾN MÃI<i class="fa-solid fa-angle-down"></i></li>
+                        <li>ĐĂNG KÝ<i class="fa-solid fa-angle-down"></i></li>
+                        <li>HƯỚNG DẪN</li>
+                        <li>LIÊN HỆ</li>
+    
+                        <div class="flex p-3 md:hidden z-50">
+                            <i class="fa-solid fa-volume-high text-gray-800 text-3xl text-start w-20"></i>
+                            <marquee class="text-gray-900 text-2xl font-semibold" width="100%" direction="left">
+                                🎖️ HAY88 🎖️ TẶNG THƯỞNG NẠP LÊN TỚI 700.000 TRIỆU MỖI NGÀY 💥 THƯỞNG NẠP VIP 3% KHÔNG GIỚI HẠN 🎁 HOÀN TRẢ NGÀY LÊN ĐẾN 2,8% 🧧 THAM GIA ĐỂ NHẬN THƯỞNG NGAY HÔM NAY 🎉
+                            </marquee>
+                        </div>
+                    </ul>
+                </nav>
+    
+                <div class="log-item text-white hidden md:block">
+                    <button class="">ĐĂNG KÝ</button>
+                    <button class="">ĐĂNG NHẬP</button>
+                </div>
+            </div>
+    
+            <div class="btncenter text-gray-900 flex justify-center items-center md:hidden p-2">
+                <button class="">ĐĂNG KÝ</button>
+                <button class="">ĐĂNG NHẬP</button>
+            </div>
+            <div class="hidden md:block">
+                <div class="flex items-center bg-gray-200 p-3">
+                    <i class="fa-solid fa-volume-high text-gray-800 text-3xl text-start w-24 border-r border-gray-400"></i>
+                    <marquee class="text-gray-900 text-2xl font-semibold" width="100%" direction="left">
+                        🎖️ HAY88 🎖️ TẶNG THƯỞNG NẠP LÊN TỚI 700.000 TRIỆU MỖI NGÀY 💥 THƯỞNG NẠP VIP 3% KHÔNG GIỚI HẠN 🎁 HOÀN TRẢ NGÀY LÊN ĐẾN 2,8% 🧧 THAM GIA ĐỂ NHẬN THƯỞNG NGAY HÔM NAY 🎉
+                    </marquee>
+                </div>
+            </div>
+        </div>
+        <!-- end of header  -->
+        
+        <!-- hero -->
+        <section class="hero" id="hero">
+            <!-- <div class="">
+                <div class="voloume">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <article class="main-container__marquee">
+                    <div class="main-container__marquee-track">
+                        <div class="main-container__marquee-items">
+                            <span class="main-container__marquee-item">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit minus eum delectus architecto ut ab. Consequuntur blanditiis adipisci maxime velit, inventore eos, ab aspernatur est nostrum quasi beatae deleniti fugiat.</span>
+                            
+                        </div>
+                        <div aria-hidden="true" class="main-container__marquee-items">
+                            <span class="main-container__marquee-item">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit minus eum delectus architecto ut ab. Consequuntur blanditiis adipisci maxime velit, inventore eos, ab aspernatur est nostrum quasi beatae deleniti fugiat.</span>
+                            
+                        </div>
+                    </div>
+                </article>
+            </div> -->
+            <img src="src/hero.jpg" alt="">
+        </section>
+        <!-- end of hero -->
+    
+        <!-- content -->
+        <section class="content" id="content">
+            <h1>HAY88 - CÁ CƯỢC KHÔNG GIỚI HẠN TẠI CASINO SỐ 1 CHÂU Á</h1>
+            <p><span>HAY88</span> hiện đang là cái tên gây bão trong làng game trực tuyến. Nhà cái đáp ứng đầy đủ tiêu chuẩn của một casino đỉnh cao và ngày càng được yêu thích. Hãy cùng tìm hiểu cho tiết hơn về thương hiệu này trong bài viết của chúng tôi.</p>
+            <h2>Giới thiệu HAY88</h2>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã ra mắt cược thủ từ giữa năm 2017 nhưng chỉ cho đến gần đây mới thực sự bùng nổ.</span>
+            </div>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Trải qua nhiều năm hoạt động và hoàn thiện hơn theo thời gian, nhà cái đã thực sự thành công tạo được dấu ấn mạnh mẽ với đông đảo người chơi.</span>
+            </div>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Các sản phẩm hiện tại có mặt trên nền tảng của chúng tôi đều được đầu tư kỹ lưỡng cả về số lượng và chất lượng.</span>
+            </div>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Khi trở thành hội viên chính thức của website Hay88, anh em sẽ được giải trí và cá cược tại một không gian casino đẳng cấp và vô cùng sôi động.</span>
+            </div>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Có đến hàng trăm con game thuộc mọi thể loại, từ game bài, thể thao, slot game đến bắn cá cực xanh chín đang chờ đợi bet thủ khám phá.</span>
+            </div>
+            <div class="item">
+                <i class="fa-solid fa-circle"></i><span>Mức cược tại Hay88 cũng khá cạnh tranh và hứa hẹn là nơi giúp anh em có thể đổi đời chỉ sau 1 đêm với việc chơi game giải trí.</span>
+            </div>
+        </section>
+        <!-- end of content -->
+    
+        <!-- card -->
+        <section class="card" id="card">
+            <h2 class="title">
+                <em>Xem thêm: <span>THABET</span></em>
+            </h2>
+            <div class="box ">
+                <div class="box-item">
+                    <div class="image">
+                        <img src="src/1.webp" alt="">
+                    </div>
+                    <div class="description">
+                        <h3 class="title">Bắn Cá</h3>
+                        <p>Trải nghiệm hỗn chiến thế giới đại dương với các siêu cá tại HAY88</p>
+                        <a class="btn">CHIO NGAY</a>
+                    </div>
+                </div>
+                <div class="box-item">
+                    <div class="image">
+                        <img src="src/2.webp" alt="">
+                    </div>
+                    <div class="description">
+                        <h3 class="title">Bắn Cá</h3>
+                        <p>Cùng tham gia sự kiện thể thao lớn nhất trên toàn thế giới tại HAY88</p>
+                        <a class="btn">CHIO NGAY</a>
+                    </div>
+                </div>
+                <div class="box-item">
+                    <div class="image">
+                        <img src="src/3.webp" alt="">
+                    </div>
+                    <div class="description">
+                        <h3 class="title">Bắn Cá</h3>
+                        <p>Casino online HAY88 uy tín, đẳng cấp quốc tế đang chờ đợi bạn</p>
+                        <a class="btn">CHIO NGAY</a>
+                    </div>
+                </div>
+                <div class="box-item">
+                    <div class="image">
+                        <img src="src/4.webp" alt="">
+                    </div>
+                    <div class="description">
+                        <h3 class="title">Bắn Cá</h3>
+                        <p>Nơi giải trí tuyệt vời nhất để bạn thử vận may qua những con số</p>
+                        <a class="btn">CHIO NGAY</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of card -->
+    
+        <!-- slider -->
+        <section class="slider" id="slide">
+            <div class="slide swiper mySwiper">
+                <div class="wrapper swiper-wrapper">
+                   <div class="swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide1.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class=" swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide2.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide3.jpeg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class=" swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide4.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide5.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class=" swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide6.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide7.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   <div class=" swiper-slide">
+                        <div class="card-slide slide-box">
+                            <div class="image">
+                                <img src="src/slide7.jpg" alt="">
+                                <h2 class=""title>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </h2>
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi totam officiis maiores cupiditate inventore!</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div> 
+            </div>
+        </section>
+        <!-- end of slider -->
+    
+        <!-- footer -->
+        <section class="footer" id="footer">
+            <div class="info">
+                <div class="link-info">
+                    <img src="src/logo.png" alt="">
+                    <p> Hay88 - Sân chơi lý tưởng cho các game thủ đam mê cá cược.Với nhiều trò chơi hấp dẫn như : thể thao, đá gà,casino, bắn cá, nổ hũ...</p>
+                    <p>ĐỐI TÁC CHIẾN LƯỢC: <span>123WIN</span></p>
+                </div>
+                <div class="link-info">
+                    <h3 href="#">VỀ CHÚNG TÔI</h3>
+                    <div class="circle">
+                        <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-circle"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                </div>
+                <div class="link-info">
+                    <h3 href="#">TỪ KHOÁ TÌM KIẾM</h3>
+                    <div class="circle">
+                        <i class="fa-solid fa-check"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-check"></i></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-check"></i></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-check"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                </div>
+                <div class="link-info">
+                    <h3 href="#">LIÊN HỆ</h3>
+                    <div class="circle">
+                        <i class="fa-solid fa-location-dot"></i><span>Nhà cái Hay88 đã Nhà cái Hay88 đã Nhà cái Hay88 đã Nhà cái Hay88 đã  </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-phone"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-envelope"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+                    <div class="circle">
+                        <i class="fa-solid fa-check"></i><span>Nhà cái Hay88 đã </span>
+                    </div>
+    
+                    <div class="contect">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-square-twitter"></i>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-footer">
+                <img src="src/logo-footer.png" alt="">
+            </div>
+            <div class="logo-footers">
+                <img src="src/logo-footer1.png" alt="">
+            </div>
+        </section>
+        <!-- end of footer -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+          spaceBetween: 10,
+          centeredSlides: true,
+          loop: true,
+          slidesPerView: 1,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          },
+        });
+    </script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+
